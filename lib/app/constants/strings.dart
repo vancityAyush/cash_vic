@@ -16,6 +16,24 @@ class WelcomeStrings {
   static const forgot = 'Forgot Password? ';
 }
 
+enum ContestCategory {
+  electronics,
+  beauty,
+  footwear,
+  health,
+  clothing,
+  jewellery,
+  bogo,
+  arcade,
+  puzzle,
+  brain,
+  educational,
+  casino,
+  fantasy,
+  other,
+  all,
+}
+
 class SignUpStrings {
   static const sign = 'Sign Up';
   static const profile = 'My Profile';
@@ -66,10 +84,22 @@ class HomeImages {
   static const game2 = 'assets/home_images/game2.png';
   static const invite = 'assets/home_images/invite-a-friend.png';
   static const notification = 'assets/home_images/Notification.png';
-  static const puzzle = 'assets/home_images/Games.png';
+  static const games = 'assets/home_images/Games.png';
   static const slider = 'assets/home_images/slider.png';
   static const business = 'assets/home_images/shop.png';
-
+  static const arcade = 'assets/home_images/arcade.png';
+  static const puzzle = 'assets/home_images/puzzle.png';
+  static const educational = 'assets/home_images/educational.png';
+  static const brainGames = 'assets/home_images/brain_game.png';
+  static const casino = 'assets/home_images/casino.png';
+  static const fantasy = 'assets/home_images/fantasy.png';
+  static const electronics = 'assets/home_images/electronics.png';
+  static const beauty = 'assets/home_images/beauty.png';
+  static const health = 'assets/home_images/health.png';
+  static const clothing = 'assets/home_images/clothing.png';
+  static const footwear = 'assets/home_images/footwear.png';
+  static const jewellery = 'assets/home_images/jewellery.png';
+  static const bogo = 'assets/home_images/buy_one_get_one.png';
   static const female = 'assets/home_images/Female.png';
   static const roulette = 'assets/home_images/Refer.png';
 }

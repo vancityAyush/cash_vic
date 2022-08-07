@@ -1,4 +1,5 @@
 import 'package:cash_vic/app/constants/values.dart';
+import 'package:cash_vic/app/models/contest.dart';
 import 'package:cash_vic/app/services/ApiService.dart';
 import 'package:cash_vic/app/widgets/data_store.dart';
 import 'package:get/get.dart';
@@ -13,16 +14,16 @@ class HomeController extends GetxController {
   final sliderCurrentIndex = 0.obs;
   final selectedtab = 0.obs;
   final drawerdata = {}.obs;
-  final contestdata = [].obs;
+  final contestdata = <Contest>[].obs;
   final data = [
     {"name": "Daily Spin", "images": HomeImages.game},
     {"name": "Invite & Earn", "images": HomeImages.roulette},
-    {"name": "Game", "images": HomeImages.puzzle},
+    {"name": "Games", "images": HomeImages.games},
     {"name": "Exclusive Shop", "images": HomeImages.business},
-    {"name": "Puzzie Games", "images": HomeImages.flag},
-    {"name": "Best Games", "images": HomeImages.invite},
-    {"name": "Fun games", "images": HomeImages.game2},
-    {"name": "Other.", "images": HomeImages.ellipse},
+    // {"name": "Puzzie Games", "images": HomeImages.flag},
+    // {"name": "Best Games", "images": HomeImages.invite},
+    // {"name": "Fun games", "images": HomeImages.game2},
+    // {"name": "Other.", "images": HomeImages.ellipse},
   ].obs;
   @override
   void onInit() {
@@ -41,12 +42,9 @@ class HomeController extends GetxController {
 
   FetchContest() async {
     try {
-      var response = await apiService.apiManager.fetchContests();
+      final response = await apiService.fetchContest();
       print(response);
-      var d = response['data'];
-      for (var item in d) {
-        contestdata.add(item);
-      }
+      contestdata.addAll(response ?? []);
       print(contestdata);
     } catch (e) {
       showToast(e.toString());

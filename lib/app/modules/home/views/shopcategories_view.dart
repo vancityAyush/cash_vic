@@ -5,10 +5,9 @@ import 'package:cash_vic/app/modules/home/controllers/shopcategories_controller.
 import 'package:cash_vic/app/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-
 import 'package:get/get.dart';
 
-import 'gamelist_view.dart';
+import 'contest_list_view.dart';
 
 class ShopcategoriesView extends GetView<ShopcategoriesController> {
   @override
@@ -32,7 +31,9 @@ class ShopcategoriesView extends GetView<ShopcategoriesController> {
             // display each item with a card
             return GestureDetector(
               onTap: () {
-                Get.to(GamelistView());
+                Get.to(ContestListView(
+                  category: controller.items[index]['category'],
+                ));
               },
               child: SizedBox(
                 height: index.isEven ? Get.height * 0.38 : Get.height * 0.30,
@@ -56,12 +57,13 @@ class ShopcategoriesView extends GetView<ShopcategoriesController> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset(
-                        'assets/home_images/Aroma.png',
+                        controller.items[index]['images'],
+                        height: 100,
                         // scale: 3,
                       ),
                       heightSpace30,
                       Text(
-                        controller.items[index]['list'][index].toString(),
+                        controller.items[index]['name'],
                         style: BaseStyles.black14,
                       )
                     ],

@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cash_vic/app/constants/values.dart';
+import 'package:cash_vic/app/modules/home/views/gamecategories_view.dart';
 import 'package:cash_vic/app/modules/home/views/offers_view.dart';
 import 'package:cash_vic/app/modules/home/views/shopcategories_view.dart';
 import 'package:cash_vic/app/modules/home/views/wallet_view.dart';
@@ -11,7 +12,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../controllers/home_controller.dart';
-import 'gamelist_view.dart';
+import 'contest_list_view.dart';
 
 class HomeView extends GetView<HomeController> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -169,6 +170,7 @@ class HomeView extends GetView<HomeController> {
                         physics: NeverScrollableScrollPhysics(),
                         itemBuilder: (ctx, index) {
                           var item = controller.contestdata[index];
+                          final category = item.contestCategory;
                           return Column(
                             children: [
                               GestureDetector(
@@ -208,7 +210,7 @@ class HomeView extends GetView<HomeController> {
                                             borderRadius:
                                                 BorderRadius.circular(5),
                                             child: Image.asset(
-                                              'assets/home_images/a23.png',
+                                              item.image,
                                               height: 35,
                                               fit: BoxFit.cover,
                                             ),
@@ -230,12 +232,12 @@ class HomeView extends GetView<HomeController> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 heightSpace5,
-                                                Text(item['name'],
+                                                Text(item.name,
                                                     style: BaseStyles.black15),
                                                 heightSpace5,
                                                 SizedBox(
                                                   width: Get.width * 0.40,
-                                                  child: Text(item['category'],
+                                                  child: Text(item.category,
                                                       style: BaseStyles.grey13),
                                                 ),
                                               ],
@@ -268,7 +270,7 @@ class HomeView extends GetView<HomeController> {
                                         width: Get.width * 0.20,
                                         padding: const EdgeInsets.only(top: 5),
                                         child: getitem(
-                                          name: 'Get ${item['price']}',
+                                          name: 'Get ${item.price}',
                                         ),
                                       ),
                                     ],
@@ -329,7 +331,7 @@ class HomeView extends GetView<HomeController> {
           physics: NeverScrollableScrollPhysics(),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 4,
-              childAspectRatio: .8,
+              childAspectRatio: 1.2,
               crossAxisSpacing: 0.0,
               mainAxisSpacing: 0.0),
           itemCount: controller.data.length,
@@ -342,10 +344,12 @@ class HomeView extends GetView<HomeController> {
                     break;
 
                   case 2:
-                    Get.to(GamelistView());
+                    Get.to(GameCategoriesView());
                     break;
                   default:
-                    Get.to(GamelistView());
+                    Get.to(ContestListView(
+                      category: ContestCategory.all,
+                    ));
                     break;
                 }
               },
