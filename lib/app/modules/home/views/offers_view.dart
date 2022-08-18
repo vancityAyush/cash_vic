@@ -5,16 +5,18 @@ import 'package:cash_vic/app/widgets/custom_decoration.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../models/contest.dart';
+
 class OffersView extends GetView<OffersController> {
-  final dynamic data;
+  final Contest data;
   OffersView({required this.data});
   @override
   Widget build(BuildContext context) {
     Get.lazyPut(() => OffersController());
-    List<dynamic> list = data['events'] ?? [];
+    controller.putContest(data);
     return Scaffold(
         appBar: Myappbar(
-          name: data['name'],
+          name: data.name,
           image: 1,
           color: AppColors.secondaryColor,
         ),
@@ -46,7 +48,7 @@ class OffersView extends GetView<OffersController> {
                 heightSpace10,
                 Expanded(
                   child: ListView.builder(
-                      itemCount: list.length,
+                      itemCount: controller.list.length,
                       itemBuilder: (BuildContext context, int index) {
                         return Padding(
                           padding: const EdgeInsets.only(top: 8.0, bottom: 8),
@@ -88,19 +90,13 @@ class OffersView extends GetView<OffersController> {
                                       Container(
                                         width: Get.width * 0.40,
                                         child: Text(
-                                          list[index]['event_name'],
+                                          controller.events[index].event_name,
                                           style: BaseStyles.grey12,
                                         ),
                                       ),
                                       GestureDetector(
                                         onTap: () {
-                                          controller.show.value =
-                                              !controller.show.value;
-                                          if (controller.list[index] == true) {
-                                            controller.list[index] = false;
-                                          } else {
-                                            controller.list[index] = true;
-                                          }
+                                          controller.showStartButton(index);
                                         },
                                         child: Container(
                                           alignment: Alignment.center,
@@ -112,7 +108,7 @@ class OffersView extends GetView<OffersController> {
                                               color: Color(0xffECE7E7)
                                                   .withOpacity(0.5)),
                                           child: Text(
-                                            list[index]['price'],
+                                            controller.events[index].price,
                                             style: BaseStyles.black12bold,
                                           ),
                                         ),
@@ -120,7 +116,7 @@ class OffersView extends GetView<OffersController> {
                                     ],
                                   ),
                                   heightSpace10,
-                                  controller.list[index] == true
+                                  controller.list[index]
                                       ? Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -146,29 +142,34 @@ class OffersView extends GetView<OffersController> {
                                               style: BaseStyles.greybold11,
                                             ),
                                             heightSpace10,
-                                            Container(
-                                              alignment: Alignment.center,
-                                              height: 40,
-                                              width: Get.width * 0.88,
-                                              decoration: BoxDecoration(
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.grey
-                                                          .withOpacity(0.5),
-                                                      spreadRadius: 0.2,
-                                                      blurRadius: 3,
-                                                      offset: Offset(0,
-                                                          2), // changes position of shadow
-                                                    ),
-                                                  ],
-                                                  color:
-                                                      AppColors.secondaryColor,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10)),
-                                              child: Text(
-                                                'Start Now',
-                                                style: BaseStyles.whiteBold18,
+                                            GestureDetector(
+                                              onTap: () {
+                                                controller.start(index);
+                                              },
+                                              child: Container(
+                                                alignment: Alignment.center,
+                                                height: 40,
+                                                width: Get.width * 0.88,
+                                                decoration: BoxDecoration(
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.grey
+                                                            .withOpacity(0.5),
+                                                        spreadRadius: 0.2,
+                                                        blurRadius: 3,
+                                                        offset: Offset(0,
+                                                            2), // changes position of shadow
+                                                      ),
+                                                    ],
+                                                    color: AppColors
+                                                        .secondaryColor,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10)),
+                                                child: Text(
+                                                  'Start Now',
+                                                  style: BaseStyles.whiteBold18,
+                                                ),
                                               ),
                                             ),
                                           ],

@@ -1,6 +1,5 @@
-import 'dart:io';
-
 import 'package:cash_vic/app/modules/home/views/login_view.dart';
+import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -76,6 +75,13 @@ class SignupController extends GetxController {
     super.onInit();
   }
 
+  void paste() {
+    FlutterClipboard.paste().then((value) {
+      // Do what ever you want with the value.
+      refertxt.text = value;
+    });
+  }
+
   @override
   void onReady() {
     super.onReady();
@@ -121,8 +127,6 @@ class SignupController extends GetxController {
       showToast('fill your Gender');
     } else if (age == '') {
       showToast('fill your age');
-    } else if (refer == '') {
-      showToast('Copy refer code');
     } else {
       pleaseWait();
       try {
@@ -133,7 +137,7 @@ class SignupController extends GetxController {
           'state': state,
           'gender': gender,
           'age': age,
-          'refer_code': refer,
+          'used_refereal': refer,
           'image': pickedFile == null ? '' : pickedFile!.path.toString(),
         };
 

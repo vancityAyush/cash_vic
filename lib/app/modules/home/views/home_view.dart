@@ -1,7 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cash_vic/app/constants/values.dart';
+import 'package:cash_vic/app/modules/home/views/daily_spin_view.dart';
 import 'package:cash_vic/app/modules/home/views/gamecategories_view.dart';
 import 'package:cash_vic/app/modules/home/views/offers_view.dart';
+import 'package:cash_vic/app/modules/home/views/refer_and_earn_view.dart';
 import 'package:cash_vic/app/modules/home/views/shopcategories_view.dart';
 import 'package:cash_vic/app/modules/home/views/wallet_view.dart';
 import 'package:cash_vic/app/widgets/mydrawer.dart';
@@ -65,10 +67,10 @@ class HomeView extends GetView<HomeController> {
                             borderRadius: BorderRadius.circular(6),
                             border: Border.all(
                                 color: AppColors.greycolor.withOpacity(0.8))),
-                        child: Text(
-                          '100.0',
-                          style: BaseStyles.blackbold15,
-                        ),
+                        child: Obx(() => Text(
+                              controller.currentBalance.toString(),
+                              style: BaseStyles.blackbold15,
+                            )),
                       ),
                     ),
                     widthSpace10,
@@ -339,6 +341,12 @@ class HomeView extends GetView<HomeController> {
             return GestureDetector(
               onTap: () {
                 switch (index) {
+                  case 0:
+                    Get.to(DailySpinView());
+                    break;
+                  case 1:
+                    Get.to(ReferAndEarnView());
+                    break;
                   case 3:
                     Get.to(ShopcategoriesView());
                     break;

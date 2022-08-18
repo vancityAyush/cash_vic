@@ -28,11 +28,11 @@ class WalletView extends GetView<WalletController> {
                     ),
                     heightSpace10,
                     Text(
-                      '10,000',
+                      controller.currentbalance.value.toString(),
                       style: BaseStyles.black25,
                     ),
                     Text(
-                      '12 March 2020,11:13 PM',
+                      controller.getTime(),
                       style: BaseStyles.black13,
                     ),
                     Divider()

@@ -3,6 +3,7 @@ import 'package:cash_vic/app/modules/home/controllers/addbankdetails_controller.
 import 'package:cash_vic/app/modules/home/controllers/addbankuser_controller.dart';
 import 'package:cash_vic/app/modules/home/controllers/bank_controller.dart';
 import 'package:cash_vic/app/modules/home/controllers/contest_list_controller.dart';
+import 'package:cash_vic/app/modules/home/controllers/daily_spin_controller.dart';
 import 'package:cash_vic/app/modules/home/controllers/login_controller.dart';
 import 'package:cash_vic/app/modules/home/controllers/myprofile_controller.dart';
 import 'package:cash_vic/app/modules/home/controllers/offers_controller.dart';
@@ -49,6 +50,9 @@ class HomeBinding extends Bindings {
     );
     Get.lazyPut<BankController>(
       () => BankController(),
+    );
+    Get.lazyPut<DailySpinController>(
+      () => DailySpinController(),
     );
     Get.lazyPut<AddbankdetailsController>(
       () => AddbankdetailsController(),

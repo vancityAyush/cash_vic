@@ -15,4 +15,19 @@ class AppColors {
   static const greycolor5 = Color(0XFF766F53);
   static const greycolor4 = Color(0XFF57574A);
   static const greycolor = Colors.grey;
+  static const List<Color> spinnerColors = [
+    Colors.red,
+    Colors.green,
+    Colors.blue,
+    Colors.lime,
+    Colors.orange,
+    Colors.purple,
+    Colors.pink,
+    Colors.teal,
+    Colors.indigo,
+    Colors.cyan,
+    Colors.deepOrange,
+    Colors.brown,
+    Colors.grey,
+  ];
 }

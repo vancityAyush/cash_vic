@@ -1,6 +1,8 @@
+import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../provider/all_apis.dart';
 import '../../../widgets/data_store.dart';
@@ -16,7 +18,7 @@ class MyprofileController extends GetxController {
   final selectedstate = ''.obs;
   final selectedgender = ''.obs;
   final selectedage = ''.obs;
-  // final refercode = 'CASH VIC 5560'.obs;
+  final refercode = ''.obs;
   var state = [
     'Andhra Pradesh',
     'Arunachal Pradesh',
@@ -82,6 +84,7 @@ class MyprofileController extends GetxController {
     selectedage.value = data['age'].toString();
     selectedgender.value = data['gender'].toString();
     selectedImagepath.value = data['image'].toString();
+    refercode.value = data['referal_code'].toString();
   }
 
   @override
@@ -103,6 +106,17 @@ class MyprofileController extends GetxController {
       showToast('Please Select File');
       // pickedFile;
     }
+  }
+
+  void copyRef() {
+    FlutterClipboard.copy(refercode.value)
+        .then((value) => {showToast('Referral Code Copied to clipboard')});
+  }
+
+  void share() {
+    Share.share(
+        'Check out Cashvic App\n Signup with my referral code ${refercode.value} and earn upto Rs.100 for every friend who joins the app',
+        subject: "Cashvic");
   }
 
   updatec() async {

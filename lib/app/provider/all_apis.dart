@@ -23,6 +23,48 @@ class ApisProvider extends GetConnect {
     }
   }
 
+  Future<dynamic> fetchTrackList(
+      {required String userId, required String offerId}) async {
+    httpClient.baseUrl = BASE_URL;
+
+    final form = FormData({
+      'user_id': userId,
+      'offer_id': offerId,
+    });
+    var res = await post('track_list_fetch', form, headers: {
+      "Accept": "application/json",
+    });
+    if (res.statusCode == 200) {
+      return res.body;
+    } else if (res.unauthorized) {
+      return Future.error(res.body);
+    } else {
+      print(res.statusText);
+      return Future.error('Network Problem');
+    }
+  }
+
+  Future<dynamic> updateTrackList(
+      {required String userId, required String offerId}) async {
+    httpClient.baseUrl = BASE_URL;
+
+    final form = FormData({
+      'user_id': userId,
+      'offer_id': offerId,
+    });
+    var res = await post('track_list_add', form, headers: {
+      "Accept": "application/json",
+    });
+    if (res.statusCode == 200) {
+      return res.body;
+    } else if (res.unauthorized) {
+      return Future.error(res.body);
+    } else {
+      print(res.statusText);
+      return Future.error('Network Problem');
+    }
+  }
+
   Future<dynamic> profileP(key) async {
     httpClient.baseUrl = BASE_URL;
     var res = await post('fetch_profile', key, headers: {
@@ -128,6 +170,82 @@ class ApisProvider extends GetConnect {
       'user_id': userId,
     });
     var res = await post('fetch_bank', form, headers: {
+      "Accept": "application/json",
+    });
+    if (res.statusCode == 200) {
+      return res.body;
+    } else if (res.unauthorized) {
+      return Future.error(res.body);
+    } else {
+      print(res.statusText);
+      return Future.error('Network Problem');
+    }
+  }
+
+  //--------- DAILY SPIN------------------
+  Future<dynamic> fetchDailySpin() async {
+    try {
+      var response = await httpClient.get('/daily_spins');
+      if (response.statusCode == 200) {
+        return response.body;
+      } else {
+        return response.body;
+      }
+    } catch (e) {
+      return e;
+    }
+  }
+
+  //--------- Probable Winner ------------------
+
+  Future<dynamic> fetchProbableWinner() async {
+    try {
+      var response = await httpClient.get('/probable_winner');
+      if (response.statusCode == 200) {
+        return response.body;
+      } else {
+        return response.body;
+      }
+    } catch (e) {
+      return e;
+    }
+  }
+
+  //--------- Daily Spin Done ------------------
+
+  Future<dynamic> fetchDailySpinDone(String userId) async {
+    httpClient.baseUrl = BASE_URL;
+
+    final form = FormData({
+      'user_id': userId,
+    });
+    var res = await post('daily_spin_done', form, headers: {
+      "Accept": "application/json",
+    });
+    if (res.statusCode == 200) {
+      return res.body;
+    } else if (res.unauthorized) {
+      return Future.error(res.body);
+    } else {
+      print(res.statusText);
+      return Future.error('Network Problem');
+    }
+  }
+
+  //--------- Daily Winner Election Value ------------------
+
+  Future<dynamic> probableWinnerSelection(
+      {required String userId,
+      required String winningId,
+      required String amount}) async {
+    httpClient.baseUrl = BASE_URL;
+
+    final form = FormData({
+      'user_id': userId,
+      'winning_id': winningId,
+      'amount': amount,
+    });
+    var res = await post('probable_winner_selection_value', form, headers: {
       "Accept": "application/json",
     });
     if (res.statusCode == 200) {

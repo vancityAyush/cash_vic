@@ -4,6 +4,8 @@ import 'package:cash_vic/app/widgets/popupmenu.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'offers_view.dart';
+
 class ContestListView extends GetView<ContestListController> {
   ContestCategory category;
   ContestListView({required this.category});
@@ -82,9 +84,9 @@ class ContestListView extends GetView<ContestListController> {
                             children: [
                               GestureDetector(
                                 onTap: () {
-                                  // Get.to(OffersView(
-                                  //   i: index,
-                                  // ));
+                                  Get.to(OffersView(
+                                    data: controller.contestList[index],
+                                  ));
                                 },
                                 child: Container(
                                   height: 90,

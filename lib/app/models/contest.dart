@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import '../constants/values.dart';
+import '../widgets/data_store.dart';
 
 part 'contest.g.dart';
 
@@ -41,6 +42,8 @@ class Contest {
   String capping_budget;
   String capping_conversion_period;
   String capping_conversion;
+
+  String get url => click_url + "&aff_sub1=" + userID();
 
   String get image {
     switch (contestCategory) {

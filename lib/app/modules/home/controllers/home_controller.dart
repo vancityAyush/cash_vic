@@ -1,5 +1,6 @@
 import 'package:cash_vic/app/constants/values.dart';
 import 'package:cash_vic/app/models/contest.dart';
+import 'package:cash_vic/app/modules/home/controllers/wallet_controller.dart';
 import 'package:cash_vic/app/services/ApiService.dart';
 import 'package:cash_vic/app/widgets/data_store.dart';
 import 'package:get/get.dart';
@@ -15,6 +16,8 @@ class HomeController extends GetxController {
   final selectedtab = 0.obs;
   final drawerdata = {}.obs;
   final contestdata = <Contest>[].obs;
+  RxDouble currentBalance = 0.0.obs;
+  late final WalletController walletController = WalletController();
   final data = [
     {"name": "Daily Spin", "images": HomeImages.game},
     {"name": "Invite & Earn", "images": HomeImages.roulette},
@@ -30,6 +33,9 @@ class HomeController extends GetxController {
     super.onInit();
     Profilec();
     FetchContest();
+    walletController.FetchWallet().then((value) {
+      currentBalance.value = value;
+    });
   }
 
   @override

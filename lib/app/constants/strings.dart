@@ -74,7 +74,7 @@ class DrawerDetails {
 
 class HomeImages {
   static const cancel = 'assets/home_images/Cancel.png';
-
+  static const refer = 'assets/home_images/refer.jpg';
   static const vector = 'assets/home_images/Vector.png';
   static const gover = 'assets/home_images/gover.png';
   static const coinicon = 'assets/home_images/coinicon.png';

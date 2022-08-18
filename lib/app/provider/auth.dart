@@ -24,7 +24,7 @@ class AuthProvider extends GetConnect {
       'state': data['state'],
       'gender': data['gender'],
       'age': data['age'],
-      'refer_code': data['refer_code'],
+      'used_refereal': data['used_refereal'],
     });
     final form = FormData(formData);
     httpClient.baseUrl = BASE_URL;
