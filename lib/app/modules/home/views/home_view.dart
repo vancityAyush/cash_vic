@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cash_vic/app/constants/values.dart';
+import 'package:cash_vic/app/modules/home/controllers/wallet_controller.dart';
 import 'package:cash_vic/app/modules/home/views/daily_spin_view.dart';
 import 'package:cash_vic/app/modules/home/views/gamecategories_view.dart';
 import 'package:cash_vic/app/modules/home/views/offers_view.dart';
@@ -19,6 +20,7 @@ import 'contest_list_view.dart';
 class HomeView extends GetView<HomeController> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
+  final walletController = Get.find<WalletController>();
   @override
   Widget build(BuildContext context) {
     Get.lazyPut(() => HomeController());
@@ -68,7 +70,7 @@ class HomeView extends GetView<HomeController> {
                             border: Border.all(
                                 color: AppColors.greycolor.withOpacity(0.8))),
                         child: Obx(() => Text(
-                              controller.currentBalance.toString(),
+                              walletController.currentbalance.value.toString(),
                               style: BaseStyles.blackbold15,
                             )),
                       ),
@@ -144,8 +146,10 @@ class HomeView extends GetView<HomeController> {
                             ),
                           ),
                           GestureDetector(
-                            onTap: () {
-                              popupmenu(context);
+                            onTap: () async {
+                              await popupmenu(
+                                  context, controller.currentFilter);
+                              controller.Filter();
                             },
                             child: Row(
                               children: [
@@ -160,7 +164,7 @@ class HomeView extends GetView<HomeController> {
                                 ),
                               ],
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ),
@@ -168,10 +172,10 @@ class HomeView extends GetView<HomeController> {
                     Obx(
                       () => ListView.builder(
                         shrinkWrap: true,
-                        itemCount: controller.contestdata.length,
+                        itemCount: controller.filteredList.length,
                         physics: NeverScrollableScrollPhysics(),
                         itemBuilder: (ctx, index) {
-                          var item = controller.contestdata[index];
+                          var item = controller.filteredList[index];
                           final category = item.contestCategory;
                           return Column(
                             children: [

@@ -45,6 +45,9 @@ class Contest {
 
   String get url => click_url + "&aff_sub1=" + userID();
 
+  DateTime get startDate => DateTime.parse(date_start);
+
+  int get effort => events != null ? events!.length : 0;
   String get image {
     switch (contestCategory) {
       case ContestCategory.arcade:

@@ -2,7 +2,6 @@ import 'package:cash_vic/app/constants/values.dart';
 import 'package:cash_vic/app/modules/home/views/signup_view.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 
 import 'login_view.dart';
@@ -27,19 +26,9 @@ class WelcomeView extends GetView {
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: Container(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    WelcomeStrings.title1,
-                    style: BaseStyles.black18,
-                  ),
-                  heightSpace5,
-                  Text(
-                    WelcomeStrings.title2,
-                    style: BaseStyles.grey412,
-                  ),
-                ],
+              child: Text(
+                WelcomeStrings.title1,
+                style: BaseStyles.black18,
               ),
             ),
           ),

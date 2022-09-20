@@ -1,5 +1,5 @@
 class WelcomeStrings {
-  static const title1 = 'Welcome to CaseVic';
+  static const title1 = 'Welcome to CashVic';
   static const title2 =
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
   static const term = ' Term & Conditions.';
@@ -63,6 +63,7 @@ class HomeName {
 class DrawerDetails {
   static const profile = 'My Profile';
   static const wallet = 'Wallet';
+  static const rewards = 'Rewards';
   static const about = 'About us';
   static const addbank = 'Add Bank Details';
   static const privacy = 'Privacy & Policy';
@@ -120,7 +121,7 @@ class DrawerImages {
   static const term = 'assets/drawer_images/term.png';
   static const logout = 'assets/drawer_images/logout.png';
   static const maleicon = 'assets/home_images/maleicon.png';
-
+  static const rewards = 'assets/drawer_images/trophy.png';
   static const conver = 'assets/drawer_images/conver.png';
   static const bank = 'assets/drawer_images/bank.png';
   static const visibility = 'assets/drawer_images/visibility.png';

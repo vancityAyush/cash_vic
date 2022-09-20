@@ -1,3 +1,4 @@
+import 'package:cash_vic/app/modules/home/controllers/bank_controller.dart';
 import 'package:cash_vic/app/services/ApiService.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -10,7 +11,9 @@ class WalletController extends GetxController {
 
   final currentbalance = 0.0.obs;
   final all = true.obs;
+  BankController bankController = BankController();
 
+  RxBool isLoading = false.obs;
   final apiService = Get.find<ApiService>();
   final transactions = RxList<Transaction>();
 
@@ -24,6 +27,21 @@ class WalletController extends GetxController {
       currentbalance.value += balance;
     }
     return currentbalance.value;
+  }
+
+  Future<bool> withdraw(String amount, String remark) async {
+    isLoading.value = true;
+    await bankController.FetchBanks();
+    if (bankController.banksAccountList.length == 0) return false;
+    final res = await apiService.apiManager
+        .withdraw(userId: userID(), amount: amount, remarks: remark);
+    await FetchWallet();
+    isLoading.value = false;
+    if (res['response_string'] == 'OK')
+      return true;
+    else {
+      return false;
+    }
   }
 
   String getTime() {

@@ -17,14 +17,14 @@ class AppColors {
   static const greycolor = Colors.grey;
   static const List<Color> spinnerColors = [
     Colors.red,
-    Colors.green,
-    Colors.blue,
+    Colors.indigo,
+    Colors.teal,
     Colors.lime,
     Colors.orange,
+    Colors.blue,
     Colors.purple,
     Colors.pink,
-    Colors.teal,
-    Colors.indigo,
+    Colors.green,
     Colors.cyan,
     Colors.deepOrange,
     Colors.brown,

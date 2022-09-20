@@ -1,17 +1,17 @@
 import 'package:cash_vic/app/constants/values.dart';
-import 'package:cash_vic/app/models/transaction.dart';
-import 'package:cash_vic/app/modules/home/controllers/wallet_controller.dart';
+import 'package:cash_vic/app/models/coin_transaction.dart';
+import 'package:cash_vic/app/modules/home/controllers/rewards_controller.dart';
 import 'package:cash_vic/app/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-class WalletView extends GetView<WalletController> {
+class RewardsView extends GetView<RewardsController> {
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut(() => WalletController());
+    Get.lazyPut(() => RewardsController());
     return Scaffold(
-        appBar: Myappbar(image: IntroImages.cash_vic, name: 'Wallet'),
+        appBar: Myappbar(image: IntroImages.cash_vic, name: 'Rewards'),
         body: Obx(
           () => Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -22,21 +22,21 @@ class WalletView extends GetView<WalletController> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // Text(
+                    //   'Current Balance',
+                    //   style: BaseStyles.black20,
+                    // ),
+                    // heightSpace10,
                     Text(
-                      'Money Sent',
-                      style: BaseStyles.black20,
-                    ),
-                    heightSpace10,
-                    Text(
-                      controller.currentbalance.value.toString(),
+                      "${controller.points.value} Coins",
                       style: BaseStyles.black25,
                     ),
+                    // Text(
+                    //   controller.getTime(),
+                    //   style: BaseStyles.black13,
+                    // ),
                     Text(
-                      controller.getTime(),
-                      style: BaseStyles.black13,
-                    ),
-                    Text(
-                      """\nIn your wallet, your money is shown as COINS to you where 1 Coin is equal to 1 paisa.
+                      """\nIn your rewards, your money is shown as COINS to you where 1 Coin is equal to 1 paisa.
                     For Example: 1 Coin= 1 Paisa
                     100 Coins= INR 1
                     1000 Coins= INR 10
@@ -49,7 +49,7 @@ class WalletView extends GetView<WalletController> {
                     ),
                     Container(
                       alignment: Alignment.center,
-                      height: 50,
+                      height: 45,
                       decoration: BoxDecoration(
                           boxShadow: <BoxShadow>[
                             BoxShadow(
@@ -63,16 +63,8 @@ class WalletView extends GetView<WalletController> {
                       child: MaterialButton(
                         onPressed: () async {
                           String amount = "";
-                          String remark = "";
-                          await Get.bottomSheet(Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(10),
-                                topRight: Radius.circular(10),
-                              ),
-                            ),
-                            child: Column(
+                          await Get.bottomSheet(
+                            Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Container(
@@ -83,15 +75,17 @@ class WalletView extends GetView<WalletController> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       IconButton(
-                                          icon: Icon(
-                                            Icons.close,
-                                            color: Colors.black,
-                                          ),
-                                          onPressed: () {
-                                            Get.back();
-                                          }),
+                                        icon: Icon(
+                                          Icons.close,
+                                          color: Colors.black,
+                                        ),
+                                        onPressed: () {
+                                          Get.back();
+                                        },
+                                        splashRadius: 20,
+                                      ),
                                       Text(
-                                        'Withdraw',
+                                        'Redeem Points here',
                                         style: BaseStyles.black20,
                                       ),
                                       SizedBox(
@@ -101,11 +95,16 @@ class WalletView extends GetView<WalletController> {
                                   ),
                                 ),
                                 heightSpace10,
+                                Text(
+                                  "Minimum 20000 coins required",
+                                  style: BaseStyles.secondaryb15,
+                                ),
+                                heightSpace5,
                                 Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(12.0),
                                   child: Container(
                                     height: 50,
-                                    width: Get.width,
+                                    width: Get.width * 0.4,
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(5),
                                         border: Border.all(
@@ -117,33 +116,11 @@ class WalletView extends GetView<WalletController> {
                                         onChanged: (value) {
                                           amount = value;
                                         },
+                                        textAlign: TextAlign.center,
                                         decoration: InputDecoration(
-                                            border: InputBorder.none,
-                                            hintText: 'Enter Amount'),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                heightSpace5,
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                    height: 80,
-                                    width: Get.width,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(5),
-                                        border: Border.all(
-                                            color: AppColors.greycolor)),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: TextField(
-                                        keyboardType: TextInputType.text,
-                                        onChanged: (value) {
-                                          remark = value;
-                                        },
-                                        decoration: InputDecoration(
-                                            border: InputBorder.none,
-                                            hintText: 'Comments'),
+                                          border: InputBorder.none,
+                                          hintText: 'Enter Amount',
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -166,32 +143,53 @@ class WalletView extends GetView<WalletController> {
                                       color: AppColors.secondary2Color),
                                   child: Obx(() => MaterialButton(
                                         onPressed: () async {
-                                          if (controller.currentbalance.value <
-                                              int.parse(amount)) {
+                                          if (amount == "") {
                                             Get.snackbar(
-                                                'Error', 'Insufficient Balance',
-                                                snackPosition:
-                                                    SnackPosition.BOTTOM,
-                                                backgroundColor: Colors.red);
+                                              "Error",
+                                              "Please enter amount",
+                                              snackPosition:
+                                                  SnackPosition.BOTTOM,
+                                              icon: Icon(
+                                                Icons.error,
+                                                color: Colors.white,
+                                              ),
+                                              backgroundColor: Colors.red,
+                                            );
+                                          } else if (int.parse(amount) <
+                                              20000) {
+                                            Get.snackbar(
+                                              "Error",
+                                              "Minimum 20000 coins required",
+                                              snackPosition:
+                                                  SnackPosition.BOTTOM,
+                                              icon: Icon(
+                                                Icons.error,
+                                                color: Colors.white,
+                                              ),
+                                              backgroundColor: Colors.red,
+                                            );
+                                          } else if (int.parse(amount) >
+                                              controller.points.value) {
+                                            Get.snackbar(
+                                              "Error",
+                                              "Insufficient coins",
+                                              snackPosition:
+                                                  SnackPosition.BOTTOM,
+                                              icon: Icon(
+                                                Icons.error,
+                                                color: Colors.white,
+                                              ),
+                                              backgroundColor: Colors.red,
+                                            );
                                           } else {
-                                            final flag = await controller
-                                                .withdraw(amount, remark);
-                                            if (flag) {
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(
-                                                SnackBar(
-                                                  content: Text(
-                                                      'Withdrawal was Successful'),
-                                                ),
-                                              );
-                                            } else {}
+                                            final res =
+                                                await controller.redeem(amount);
                                           }
-                                          Get.back();
                                         },
                                         child: controller.isLoading.value
                                             ? CircularProgressIndicator()
                                             : Text(
-                                                "Withdraw",
+                                                "Redeem",
                                                 style: BaseStyles.whitebold20,
                                               ),
                                       )),
@@ -199,10 +197,16 @@ class WalletView extends GetView<WalletController> {
                                 heightSpace30,
                               ],
                             ),
-                          ));
+                            backgroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(20),
+                                  topRight: Radius.circular(20)),
+                            ),
+                          );
                         },
                         child: Text(
-                          "Withdraw",
+                          "Redeem",
                           style: BaseStyles.whitebold20,
                         ),
                       ),
@@ -300,7 +304,7 @@ class WalletView extends GetView<WalletController> {
                       itemCount: controller.transactions.length,
                       physics: BouncingScrollPhysics(),
                       itemBuilder: (ctx, index) {
-                        Transaction transaction =
+                        CoinTransaction transaction =
                             controller.transactions[index];
                         return Container(
                           child: Row(
@@ -318,14 +322,17 @@ class WalletView extends GetView<WalletController> {
                                         CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      Text(transaction.remarks,
+                                      Text(transaction.remarks ?? "",
                                           style: BaseStyles.black13),
                                       Text("Transaction id : ${transaction.id}",
                                           style: BaseStyles.black13),
                                       Text(
                                           DateFormat('h:mm a dd-MMMM yyyy')
                                               .format(transaction.time),
-                                          style: BaseStyles.secondary12)
+                                          style: BaseStyles.secondary12),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
                                     ],
                                   ),
                                 ],
@@ -333,10 +340,10 @@ class WalletView extends GetView<WalletController> {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
-                                  transaction.value,
-                                  style: BaseStyles.black13,
+                                  "${transaction.points} Coins",
+                                  style: BaseStyles.blackbold15,
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         );

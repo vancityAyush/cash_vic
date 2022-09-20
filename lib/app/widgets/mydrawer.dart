@@ -1,15 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cash_vic/app/constants/values.dart';
 import 'package:cash_vic/app/modules/home/views/aboutus_view.dart';
-import 'package:cash_vic/app/modules/home/views/addbankdetails_view.dart';
 import 'package:cash_vic/app/modules/home/views/addbankuser_view.dart';
 import 'package:cash_vic/app/modules/home/views/feq_view.dart';
 import 'package:cash_vic/app/modules/home/views/privacy_view.dart';
+import 'package:cash_vic/app/modules/home/views/rewards_view.dart';
 import 'package:cash_vic/app/modules/home/views/termcondition_view.dart';
 import 'package:cash_vic/app/modules/home/views/wallet_view.dart';
 import 'package:cash_vic/app/widgets/sign_out.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 
 import '../modules/home/views/myprofile_view.dart';
@@ -101,6 +100,17 @@ mainDrawer(controller) {
                   action: () {
                     Get.back();
                     Get.to(WalletView());
+                    // Get.toNamed('/home');
+                  }),
+              SizedBox(height: 10),
+              _draweritem(
+                  controller: controller,
+                  index: 7,
+                  icon: DrawerImages.rewards,
+                  title: DrawerDetails.rewards,
+                  action: () {
+                    Get.back();
+                    Get.to(RewardsView());
                     // Get.toNamed('/home');
                   }),
               SizedBox(height: 10),

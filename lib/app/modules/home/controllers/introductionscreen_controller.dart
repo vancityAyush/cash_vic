@@ -2,8 +2,16 @@ import 'package:cash_vic/app/constants/values.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class IntroductionController extends GetxController {
+  YoutubePlayerController ytController = YoutubePlayerController(
+    initialVideoId: "FqDP3hbwErA",
+    flags: YoutubePlayerFlags(
+      autoPlay: false,
+      mute: true,
+    ),
+  );
   final imageList = [
     IntroImages.videos,
     IntroImages.marketing,

@@ -2,7 +2,6 @@ import 'package:cash_vic/app/constants/values.dart';
 import 'package:cash_vic/app/widgets/custom_appbar.dart';
 import 'package:cash_vic/app/widgets/custom_decoration.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 
 class AboutusView extends GetView {
@@ -28,7 +27,7 @@ class AboutusView extends GetView {
                 ),
                 heightSpace20,
                 Text(
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Rhoncus vitae sodales egestas feugiat etiam.',
+                  'Bringing opportunity to earn CASH to our VIC’s (Very Important Customer) is what CashVic about. CashVic, is an application designed in such a simplified platform that connects all of our users with brands, allow them to experience Brand’s Product/Services and the same time EARN money with no limitation. With CashVic, you get an opportunity to make your second Income even if you are student, not working anywhere or want a earn from home money. Try our app, earn money and keep earning!!',
                   style: BaseStyles.grey15,
                 ),
                 heightSpace10,

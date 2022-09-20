@@ -1,5 +1,7 @@
 import 'package:cash_vic/app/models/contest.dart';
 import 'package:cash_vic/app/models/spin_data.dart';
+import 'package:cash_vic/app/widgets/data_store.dart';
+import 'package:get/get_connect/http/src/multipart/form_data.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_disposable.dart';
 
 import '../provider/all_apis.dart';
@@ -27,6 +29,56 @@ class ApiService extends GetxService {
       print(e.toString());
     }
     return false;
+  }
+
+  Future<dynamic> getProbWin() async {
+    try {
+      var profile = await getProfileData();
+      DateTime createdDate = DateTime.parse(profile['data']["created_at"]);
+      String type = "";
+      if (createdDate.difference(DateTime.now()) < Duration(days: 15)) {
+        type = "First";
+      } else {
+        type = "Regular";
+      }
+      var response = await apiManager.getProbWin(userID(), type);
+      return response;
+    } catch (e) {
+      print(e.toString());
+    }
+    return "0";
+  }
+
+  Future<List<int>> getSpinnerItems() async {
+    try {
+      var res = await getProfileData();
+      DateTime createdDate = DateTime.parse(res['data']["created_at"]);
+      var response = await apiManager.getSpinnerItems();
+      if (createdDate.difference(DateTime.now()) < Duration(days: 15)) {
+        final list = List<int>.from(response["for_first"]);
+        return list;
+      } else {
+        final list = List<int>.from(response["for_regular"]);
+        return list;
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+    return [];
+  }
+
+  getProfileData() async {
+    try {
+      Map imagepath = {"key": token()};
+      Map<String, dynamic> formData = Map<String, dynamic>.from(imagepath);
+      final form = FormData(formData);
+
+      print(form);
+      var res = await apiManager.profileP(form);
+      return res;
+    } catch (e) {
+      print(e);
+    }
   }
 
   Future<List<Contest>?> fetchContest() async {

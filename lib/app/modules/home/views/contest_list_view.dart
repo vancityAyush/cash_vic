@@ -35,8 +35,9 @@ class ContestListView extends GetView<ContestListController> {
         ),
         actions: [
           GestureDetector(
-              onTap: () {
-                popupmenu(context);
+              onTap: () async {
+                await popupmenu(context, controller.currentFilter);
+                controller.Filter(category);
               },
               child: Padding(
                 padding: const EdgeInsets.all(15.0),
@@ -75,17 +76,17 @@ class ContestListView extends GetView<ContestListController> {
                 )
               : ListView.builder(
                   shrinkWrap: true,
-                  itemCount: controller.contestList.length,
+                  itemCount: controller.filteredList.length,
                   physics: BouncingScrollPhysics(),
                   itemBuilder: (ctx, index) {
-                    return controller.contestList[index].contestCategory ==
+                    return controller.filteredList[index].contestCategory ==
                             category
                         ? Column(
                             children: [
                               GestureDetector(
                                 onTap: () {
                                   Get.to(OffersView(
-                                    data: controller.contestList[index],
+                                    data: controller.filteredList[index],
                                   ));
                                 },
                                 child: Container(
@@ -120,7 +121,7 @@ class ContestListView extends GetView<ContestListController> {
                                                 BorderRadius.circular(5),
                                             child: Image.asset(
                                               controller
-                                                  .contestList[index].image,
+                                                  .filteredList[index].image,
                                               height: 35,
                                               fit: BoxFit.cover,
                                             ),
@@ -144,7 +145,7 @@ class ContestListView extends GetView<ContestListController> {
                                                 heightSpace5,
                                                 Text(
                                                     controller
-                                                        .contestList[index]
+                                                        .filteredList[index]
                                                         .name,
                                                     style: BaseStyles.black16),
                                                 heightSpace5,
@@ -184,7 +185,7 @@ class ContestListView extends GetView<ContestListController> {
                                               const EdgeInsets.only(top: 5),
                                           child: getitem(
                                             name:
-                                                'Get ${controller.contestList[index].price}',
+                                                'Get ${controller.filteredList[index].price}',
                                           )),
                                     ],
                                   ),

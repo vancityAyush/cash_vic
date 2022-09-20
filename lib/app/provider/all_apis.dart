@@ -23,6 +23,82 @@ class ApisProvider extends GetConnect {
     }
   }
 
+  Future<dynamic> redeemPoints(String userId, String amount) async {
+    try {
+      var response = await httpClient.get('/reward_redeem/$userId/$amount');
+      if (response.statusCode == 200) {
+        return response.body;
+      } else {
+        return response.body;
+      }
+    } catch (e) {
+      return e;
+    }
+  }
+
+  Future<dynamic> rewardPoints(String userId) async {
+    try {
+      var response = await httpClient.get('/reward_points/$userId');
+      if (response.statusCode == 200) {
+        return response.body;
+      } else {
+        return response.body;
+      }
+    } catch (e) {
+      return e;
+    }
+  }
+
+  Future<dynamic> getProbWin(String userId, String type) async {
+    try {
+      var response = await httpClient.get('/prob_winn/$userId/$type');
+      if (response.statusCode == 200) {
+        return response.body;
+      } else {
+        return response.body;
+      }
+    } catch (e) {
+      return e;
+    }
+  }
+
+  Future<dynamic> getSpinnerItems() async {
+    try {
+      var response = await httpClient.get('/fetch_spinner_items');
+      if (response.statusCode == 200) {
+        return response.body;
+      } else {
+        return response.body;
+      }
+    } catch (e) {
+      return e;
+    }
+  }
+
+  Future<dynamic> withdraw(
+      {required String userId,
+      required String amount,
+      required String remarks}) async {
+    httpClient.baseUrl = BASE_URL;
+
+    final form = FormData({
+      'user_id': userId,
+      "amount": amount,
+      "remarks": remarks,
+    });
+    var res = await post('create_withdraw_request', form, headers: {
+      "Accept": "application/json",
+    });
+    if (res.statusCode == 200) {
+      return res.body;
+    } else if (res.unauthorized) {
+      return Future.error(res.body);
+    } else {
+      print(res.statusText);
+      return Future.error('Network Problem');
+    }
+  }
+
   Future<dynamic> fetchTrackList(
       {required String userId, required String offerId}) async {
     httpClient.baseUrl = BASE_URL;

@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class IntroductionView extends GetView<IntroductionController> {
   final introKey = GlobalKey<IntroductionScreenState>();
@@ -31,31 +32,54 @@ class IntroductionView extends GetView<IntroductionController> {
                   print(controller.imageurl);
                 },
                 pages: [
-                  // PageViewModel(
-                  //   title: 'FXKUBER',
-                  //   body: 'Motivation to move.',
-                  // ),
-
+                  PageViewModel(
+                      bodyWidget: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          """It’s very simple and easy. 
+Login to your account, select the offer you want to try and complete it as per the given instruction.
+""",
+                          style: BaseStyles.grey12,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      titleWidget: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          YoutubePlayer(
+                            controller: controller.ytController,
+                            showVideoProgressIndicator: true,
+                          ),
+                          SizedBox(height: Get.height * 0.30),
+                          Container(
+                            height: 44,
+                            width: 278,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                border:
+                                    Border.all(color: AppColors.secondaryColor),
+                                borderRadius: BorderRadius.circular(25)),
+                            child: Text(
+                              "How To Use",
+                              style: BaseStyles.secondaryColor12,
+                              textAlign: TextAlign.center,
+                            ),
+                          )
+                        ],
+                      ),
+                      decoration: PageDecoration(
+                          bodyAlignment: Alignment.center,
+                          titlePadding: EdgeInsets.all(10))),
                   pageModel(
                       body:
-                          'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-                      title: 'How To Use',
-                      image: IntroImages.videos),
-                  pageModel(
-                      body:
-                          'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                          'Refer Cash Vic App to your family/friend & get referral bonus in your account when they Install the App.',
                       title: 'Refer & Earn',
                       image: IntroImages.refer),
                   pageModel(
                       title: 'Daily Spain',
                       body:
-                          'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                          'Spin your luck wheel every day and win assured prizes !!',
                       image: IntroImages.refer),
-                  pageModel(
-                      title: 'Bulk Share',
-                      body:
-                          'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-                      image: IntroImages.marketing),
                 ],
                 //  [
 

@@ -23,6 +23,11 @@ class BaseStyles {
       fontSize: 15,
       fontWeight: FontWeight.w600,
       fontFamily: 'Poppins');
+  static final whitebold25 = TextStyle(
+      color: AppColors.whitecolor,
+      fontSize: 25,
+      fontWeight: FontWeight.w800,
+      fontFamily: 'Poppins');
   static final whiteBold18 = TextStyle(
       color: AppColors.whitecolor,
       fontSize: 18,
@@ -31,6 +36,10 @@ class BaseStyles {
   static final white18 = TextStyle(
     color: AppColors.whitecolor,
     fontSize: 18,
+  );
+  static final white12 = TextStyle(
+    color: AppColors.whitecolor,
+    fontSize: 12,
   );
   static final whiteBold13 = TextStyle(
       color: AppColors.whitecolor,

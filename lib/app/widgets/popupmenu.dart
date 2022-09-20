@@ -3,8 +3,8 @@ import 'package:cash_vic/app/constants/values.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-popupmenu(context) {
-  return showModalBottomSheet(
+Future popupmenu(context, RxInt controller) async {
+  return await showModalBottomSheet(
     //isDismissible: true,
     // enableDrag: true,
     backgroundColor: Colors.transparent,
@@ -44,6 +44,7 @@ popupmenu(context) {
                 title: Text('Max pay-out'),
                 onTap: () {
                   Navigator.pop(context);
+                  controller.value = 0;
                 }),
             ListTile(
                 visualDensity: VisualDensity(horizontal: -4, vertical: -4),
@@ -52,7 +53,8 @@ popupmenu(context) {
                 title: Text('Most Used'),
                 onTap: () {
                   // controller.users.removeAt(i);
-                  // Navigator.pop(context);
+                  controller.value = 1;
+                  Navigator.pop(context);
                 }),
             ListTile(
                 visualDensity: VisualDensity(horizontal: -4, vertical: -4),
@@ -61,6 +63,7 @@ popupmenu(context) {
                 title: Text('Less effort'),
                 onTap: () {
                   Navigator.pop(context);
+                  controller.value = 2;
                 }),
             ListTile(
                 visualDensity: VisualDensity(horizontal: -4, vertical: -4),
@@ -69,6 +72,7 @@ popupmenu(context) {
                 title: Text('Recently added'),
                 onTap: () {
                   Navigator.pop(context);
+                  controller.value = 3;
                 }),
           ]),
         ),
@@ -80,5 +84,5 @@ popupmenu(context) {
 // import 'package:get/get.dart';
 
 // Homemore(context, controller, i) {
- 
+
 // }

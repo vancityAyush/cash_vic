@@ -9,6 +9,7 @@ import 'package:cash_vic/app/modules/home/controllers/myprofile_controller.dart'
 import 'package:cash_vic/app/modules/home/controllers/offers_controller.dart';
 import 'package:cash_vic/app/modules/home/controllers/privacy_controller.dart';
 import 'package:cash_vic/app/modules/home/controllers/profile_controller.dart';
+import 'package:cash_vic/app/modules/home/controllers/rewards_controller.dart';
 import 'package:cash_vic/app/modules/home/controllers/shopcategories_controller.dart';
 import 'package:cash_vic/app/modules/home/controllers/signup_controller.dart';
 import 'package:cash_vic/app/modules/home/controllers/termcondition_controller.dart';
@@ -62,6 +63,9 @@ class HomeBinding extends Bindings {
     );
     Get.lazyPut<WalletController>(
       () => WalletController(),
+    );
+    Get.lazyPut<RewardsController>(
+      () => RewardsController(),
     );
     Get.lazyPut<SignupController>(
       () => SignupController(),

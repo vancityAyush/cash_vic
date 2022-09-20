@@ -33,7 +33,7 @@ class ReferAndEarnView extends GetView<MyprofileController> {
         actions: [
           GestureDetector(
             onTap: () {
-              popupmenu(context);
+              popupmenu(context, 0.obs);
             },
             child: Padding(
               padding: const EdgeInsets.all(15.0),
@@ -71,7 +71,11 @@ class ReferAndEarnView extends GetView<MyprofileController> {
             ),
             heightSpace5,
             Text(
-              "Tap on the box to copy referral code",
+              """\nWith our Refer & Earn Program you can earn the unlimited rewards with just a single click..
+
+Just copy the code shown above and send it to all your family, Friends and Group.
+""",
+              textAlign: TextAlign.center,
               style: BaseStyles.blackbold15,
             ),
             heightSpace30,
@@ -114,8 +118,8 @@ class ReferAndEarnView extends GetView<MyprofileController> {
             ),
             heightSpace30,
             Text(
-              "Share your referral code with your friends and earn extra cash",
-              style: BaseStyles.blackbold15,
+              "Every new user( to Cash Vic App) who gets registered on Cash Vic App by using your referral code will make you earn INR 4( 400 Coins). For Example, if  10 of your known uses your code and Register with the Cash Vic App, you earn INR 40( 40000 Coins)",
+              style: BaseStyles.grey12,
             ),
           ],
         ),
